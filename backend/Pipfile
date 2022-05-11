@@ -4,6 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+mysql-connector-python = "*"
 
 [dev-packages]
 
