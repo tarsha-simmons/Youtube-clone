@@ -1,3 +1,4 @@
+from pkg_resources import parse_requirements
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -17,7 +18,7 @@ def get_all_comments(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def user_comments(request):
+def user_comment(request):
     print('User', f'{request.data} {request.user.email} {request.user.username}')
     if request.method == 'POST':
         serializer = CommentSerializer(data=request.data)
@@ -25,4 +26,14 @@ def user_comments(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_comment_by_id(request, pk):
+    if request.method == 'GET':
+        comment = Comment.objects.filter(user_id=request.user.id)
+        serializer = CommentSerializer(comment, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
