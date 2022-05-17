@@ -59,8 +59,8 @@ const HomePage = () => {
             </p>
           ))};
       </div>
-      <div>
-
+      <div className="container">
+        <Link to="searchbar">Search</Link>
       </div>
       
     </div>
