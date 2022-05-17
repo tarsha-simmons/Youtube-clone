@@ -1,8 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
+
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -10,6 +13,10 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
+  const [videos, setVideos] = useState([])
+  console.log(user)
+  console.log(token)
+
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -24,17 +31,38 @@ const HomePage = () => {
         console.log(error.message);
       }
     };
+    const getYtVideos = async () => {
+      try {
+        let response = await axios.get("https://www.googleapis.com/youtube/v3", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        console.log(response.data)
+        setVideos(response.data);
+      } catch (error) {
+        console.log("error with get YT Videos")
+      }
+    };
     fetchCars();
+    getYtVideos();
   }, [token]);
   return (
-    <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.make} {car.model}
-          </p>
-        ))}
+    <div>
+      <div className="container">
+        <h1>Home Page for {user.username}!</h1>
+        <Link to="addcar">Add Car!</Link>
+        {cars &&
+          cars.map((car) => (
+            <p key={car.id}>
+              {car.year} {car.make} {car.model}
+            </p>
+          ))};
+      </div>
+      <div>
+
+      </div>
+      
     </div>
   );
 };

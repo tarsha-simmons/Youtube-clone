@@ -12,7 +12,7 @@ from comments.models import Comment
 @permission_classes([IsAuthenticated])
 def get_replies(request, pk,):
     print('User', f'{request.data} {request.user.email} {request.user.username}')
-    reply = get_object_or_404(Reply, pk=pk.comment.id)
+    reply = get_object_or_404(Reply, pk=pk, )
     if request.method == 'POST':
         serializer = ReplySerializer(reply, data=request.data)
         if serializer.is_valid(raise_exception=True):

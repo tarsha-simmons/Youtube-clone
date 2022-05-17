@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import Comment from "../Comment/Comment";
 
-const DisplayPosts = (props) => {
+const DisplayComments = (props) => {
 
     return ( 
         <Fragment>
@@ -17,4 +17,4 @@ const DisplayPosts = (props) => {
     );
 }
  
-export default DisplayPosts;
+export default DisplayComments;
