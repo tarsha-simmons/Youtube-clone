@@ -10,32 +10,8 @@ let initvalues = {
 }
 
 const SearchBar = (props) => {
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(initvalues, searchVideo)
-    const navigate = useNavigate()
-    const [videos, setVideos] = useState()
-    
-    async function searchVideo() {
-        try {
-            let response = await axios.get(
-                "https://www.googleapis.com/youtube/v3/search",
-                {
-                    params: {
-                        q: formData.title,
-                        part: "snippet",
-                        type: "video",
-                        key: "AIzaSyDSathvk7VH3JW5fPPeAET4wk-R5do7eic",
-                        maxResults: "5"
-                    }
-                }
-            );
-            console.log(response.data)
-            setVideos(response.data);
-            navigate("/search");
-        } catch (error) {
-            console.log("error with get search video")
-            
-        }
-    }
+    const [formData, handleInputChange, handleSubmit] = useCustomForm(initvalues)
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
