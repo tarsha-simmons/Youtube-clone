@@ -47,7 +47,6 @@ const HomePage = () => {
       <div className="container">
         <SearchBar />
       </div>
-      
     </div>
   );
 };

@@ -1,8 +1,12 @@
 import React from "react";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
 const VideoPage = (props) => {
     return ( 
-        <h2>VideoPage</h2>
+        <div>
+            <h2>VideoPage</h2>
+            <VideoPlayer />
+        </div>
      );
 }
  
