@@ -2,7 +2,8 @@ import React from "react";
 import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import "./NavBar.css";
+import "./NavBar.css"
+import SearchBar from "./SearchBar/SearchBar";
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
@@ -15,6 +16,7 @@ const Navbar = () => {
             <b>React/Django JWT</b>
           </Link>
         </li>
+        <div><SearchBar/></div>
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>
