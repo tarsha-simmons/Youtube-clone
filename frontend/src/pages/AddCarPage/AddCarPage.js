@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -65,7 +65,7 @@ const AddCarPage = (props) => {
                         onChange={handleInputChange}
                     />    
                 </label>
-                <button>AddCar</button>
+                <button></button>
             </form>
         </div>
 

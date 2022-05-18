@@ -13,7 +13,6 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
-  const [videos, setVideos] = useState([])
   console.log(user)
   console.log(token)
 
@@ -31,21 +30,7 @@ const HomePage = () => {
         console.log(error.message);
       }
     };
-    const getYtVideos = async () => {
-      try {
-        let response = await axios.get("https://www.googleapis.com/youtube/v3", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        console.log(response.data)
-        setVideos(response.data);
-      } catch (error) {
-        console.log("error with get YT Videos")
-      }
-    };
     fetchCars();
-    getYtVideos();
   }, [token]);
   return (
     <div>
@@ -60,7 +45,7 @@ const HomePage = () => {
           ))};
       </div>
       <div className="container">
-        <Link to="searchbar">Search</Link>
+        <SearchBar />
       </div>
       
     </div>
