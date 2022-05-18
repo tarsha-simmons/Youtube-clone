@@ -1,20 +1,24 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Comment from "../Comment/Comment";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
-const DisplayComments = (props) => {
+const CommentList = (props) => {
 
-    return ( 
+
+    return (
         <Fragment>
-            {props.element.map((commentRecord, index) => {
-                return(
-                     <div className="form-control">
-                         <Comment commentRecord={commentRecord} />
-                     </div>
-                )
-                }
+            {props.getAllCommentsProperty &&
+                props.getAllCommentsProperty.map((postComment, index) => {
+                    return(
+                        <p className="form-control" key={postComment.id}>
+                            <Comment postComment={postComment} />
+                        </p>
+                    )
+                    }
             )}
-        </Fragment>
+        </Fragment> 
     );
 }
  
-export default DisplayComments;
+export default CommentList;
