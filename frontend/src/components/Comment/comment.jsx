@@ -25,7 +25,7 @@ const Comment = (props) => {
     return ( 
         <div>
         <table>
-          <tbody>
+        <tbody>
             <tr>
                 <td>
                     {user.username}
@@ -33,10 +33,10 @@ const Comment = (props) => {
                 </td>
             </tr>
             <div>
-              <button className={likedButton} onClick={handleClick}></button>
-              <button className={dislikedButton} onClick={handleClick}></button>
+            <button className={likedButton} onClick={handleClick}></button>
+            <button className={dislikedButton} onClick={handleClick}></button>
             </div>
-          </tbody>
+        </tbody>
         </table>
       </div>
      );

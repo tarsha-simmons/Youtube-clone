@@ -8,6 +8,10 @@
   box-sizing: inherit;
 }
 
+body {
+  background-image: radial-gradient(circle, #3d4856, #49596f, #556b8a, #627da5, #718fc1, #719fd4, #6eafe6, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);;
+}
+
 html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;

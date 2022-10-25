@@ -4,10 +4,12 @@ import RelatedVideos from "../../components/RelatedVideos/RelatedVideos";
 import CommentList from "../../components/CommentList/CommentList";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const VideoPage = (props) => {
     const [comments, setAllComments] = useState()
     const [user, token] = useAuth()
+    const { id } = useParams();
 
     useEffect(() => {
         const getComments = async() => {
@@ -31,8 +33,6 @@ const VideoPage = (props) => {
         <div>
             <h2>VideoPage</h2>
             <VideoPlayer />
-            <RelatedVideos />
-            <CommentList getAllCommentsProperty={comments}/>
         </div>
      );
 }

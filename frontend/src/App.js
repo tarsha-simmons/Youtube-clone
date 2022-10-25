@@ -33,8 +33,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/addcar" element={<PrivateRoute><AddCarPage /></PrivateRoute>} />
-        <Route path="/search" element={<PrivateRoute><SearchPage /></PrivateRoute>} />
-        <Route path="/video" element={<VideoPage />} />
+        <Route path="/searchpage/:title" element={<PrivateRoute><SearchPage /></PrivateRoute>} />
+        <Route path="/videopage/:id" element={<VideoPage />} />
       </Routes>
       <Footer />
     </div>

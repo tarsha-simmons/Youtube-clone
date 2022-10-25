@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import "./SearchBar.css"
@@ -11,44 +12,44 @@ let initvalues = {
 
 
 const SearchBar = (props) => {
+    const [formData, handleInputChange] = useCustomForm(initvalues);
+    const [videos, setVideos] = useState();
+    const [user, token] = useAuth();
+    const navigate = useNavigate();
 
-    const [searchTerm, setSearchTerm] = useState("")
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(initvalues, searchVideo)
-    const navigate = useNavigate()
-    const [videos, setVideos] = useState()
-    
-    async function searchVideo() {
-        try {
-            let response = await axios.get(
-                "https://www.googleapis.com/youtube/v3/search",
-                {
-                    params: {
-                        q: formData.title,
-                        part: "snippet",
-                        type: "video",
-                        key: "AIzaSyDSathvk7VH3JW5fPPeAET4wk-R5do7eic",
-                        maxResults: "5"
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        searchVideo(formData);
+      };
+
+   async function searchVideo() {
+            try {
+                let response = await axios.get(
+                    "https://www.googleapis.com/youtube/v3/search",
+                    {
+                        params: {
+                            q: `${formData.title}`,
+                            part: "snippet",
+                            type: "video",
+                            key: "AIzaSyDIZc7C82S2B4rtZp82r7gN2pBi5Pnv5H4",
+                            maxResults: "5"
+                        }
                     }
-                }
-            );
-            console.log(response.data)
-            setVideos(response.data);
-            navigate("/search");
-        } catch (error) {
-            console.log("error with get search video")
-            
-        }
-
+                );
+                console.log(response.data)
+                setVideos(response.data);
+                navigate(`/searchpage/${formData.title}`);
+            } catch (error) {
+                console.log("error with get search videos")
+                
+            }
+        }; 
 
     return ( 
         <form className="m-2" onSubmit={handleSubmit}>
-                <input type="text" placeholder="Search Terms" value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}}/>
-                <Link to={`/search/${searchTerm}`}> 
-                    <PlayBtn color="white" className="button red-text pr-3 m-1" size={48} type="submit"></PlayBtn>
-                </Link>
                 <div>
                     <label>
-                        title:{""}
+                        Search:{""}
                         <input
                         type="text" 
                         name="title" 
@@ -57,10 +58,9 @@ const SearchBar = (props) => {
                         />    
                     </label>
                 </div>
-                <button type='submit'>Search</button>
+                <button type="submit">Search</button>
         </form>
      );
-    }
 }    
  
 export default SearchBar;
